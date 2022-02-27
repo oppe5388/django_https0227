@@ -33,7 +33,7 @@ services:
     expose:
       - '8001'
     #command: uwsgi --socket :8001 --module mysite.wsgi
-    command: python3 manage.py runserver 8001
+    command: python3 manage.py runserver 0.0.0.0:8001
     depends_on:
       - db
 
