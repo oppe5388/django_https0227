@@ -1,0 +1,11 @@
+{
+	"name": "AnythingOK",
+	"dockerComposeFile": "docker-compose.yml",
+	"forwardPorts": [8001],
+	"service": "django",
+	"workspaceFolder": "/code",
+	"overrideCommand": false,
+  	//指定しないとコンテナ再生成で拡張機能が消える
+	"extensions": [
+	]
+}
