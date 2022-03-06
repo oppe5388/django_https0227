@@ -43,7 +43,7 @@ services:
     #   - '8001'
       - '8000'
     # command: uwsgi --socket :8001 --module mysite.wsgi
-    # command: python3 manage.py runserver 0.0.0.0:8001
+    # command: python3 manage.py runserver 0.0.0.0:8000
     command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
     depends_on:
       - db
