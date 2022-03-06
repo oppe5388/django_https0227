@@ -28,6 +28,7 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/code/static
+      - media_volume:/code/media
     ports:
       - 1317:80
     depends_on:
@@ -42,6 +43,7 @@ services:
       # - ./src:/code
       - ./:/code:cached
       - static_volume:/code/static
+      - media_volume:/code/media
     expose:
     #   - '8001'
       - '8000'
@@ -72,3 +74,4 @@ services:
 volumes:
     db-data:
     static_volume:
+    media_volume:
