@@ -1,6 +1,6 @@
 {
 	"name": "AnythingOK",
-	"dockerComposeFile": "docker-compose.yml",
+	"dockerComposeFile": "../docker-compose.yml",
 	"forwardPorts": [8001],
 	"service": "django",
 	"workspaceFolder": "/code",

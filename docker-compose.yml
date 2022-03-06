@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.7'
 services:
   web:
     image: steveltn/https-portal:1
@@ -6,12 +6,12 @@ services:
     restart: always
     #volumesセクション自体、現時点で不要
     # volumes:
-    #   - ../nginx/ssl_certs:/var/lib/https-portal
-    #   - ../nginx/conf/mysite_nginx.conf:/etc/nginx/conf.d/mysite_nginx.conf
-    #   - ../nginx/conf/mysite_nginx.conf:/var/lib/nginx-conf/vccmarsh.link.conf.erb:ro
-    #   - ../nginx/uwsgi_params:/etc/nginx/uwsgi_params
-    #   # - ../src/static:/static
-    #   - ../static:/static
+    #   - ./nginx/ssl_certs:/var/lib/https-portal
+    #   - ./nginx/conf/mysite_nginx.conf:/etc/nginx/conf.d/mysite_nginx.conf
+    #   - ./nginx/conf/mysite_nginx.conf:/var/lib/nginx-conf/vccmarsh.link.conf.erb:ro
+    #   - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+    #   # - ./src/static:/static
+    #   - ./static:/static
 
     ports:
       - '80:80'
@@ -30,13 +30,16 @@ services:
     container_name: django111
     volumes:
       # - ./src:/code
-      - ../:/code:cached
+      - ./:/code:cached
     expose:
       - '8001'
-    #command: uwsgi --socket :8001 --module mysite.wsgi
-    command: python3 manage.py runserver 0.0.0.0:8001
+    # command: uwsgi --socket :8001 --module mysite.wsgi
+    # command: python3 manage.py runserver 0.0.0.0:8001
+    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8001
     depends_on:
       - db
+    env_file:
+      - ./.env.dev
 
   db:
     # image: postgres:latest
@@ -51,6 +54,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=db
+    env_file:
+      - ./.env.dev
 
 volumes:
     db-data:
