@@ -1,0 +1,66 @@
+version: "3.7"
+
+services:
+  django:
+    build: .
+    container_name: django111
+    volumes:
+      # - ./src:/code
+      - ./:/code:cached
+      - static_volume:/code/static
+      - media_volume:/code/media
+    expose:
+      - 8000
+    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+    depends_on:
+      - db
+    env_file:
+      - ./.env.prod
+
+  db:
+    image: postgres
+    container_name: db111
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file:
+      - ./.env.prod
+
+  nginx-proxy:
+    container_name: nginx-proxy
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    restart: always
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - static_volume:/code/static
+      - media_volume:/code/media
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    depends_on:
+      - django
+
+
+  nginx-proxy-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    env_file:
+      - .env.prod
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+    depends_on:
+      - nginx-proxy
+
+volumes:
+  db-data:
+  static_volume:
+  media_volume:
+  certs:
+  html:
+  vhost:
