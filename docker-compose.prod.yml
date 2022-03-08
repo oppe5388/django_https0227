@@ -28,7 +28,7 @@ services:
       - .env.prod
 
   nginx-proxy:
-    container_name: nginx-proxy1prod
+    container_name: nginx-proxy
     build:
       context: /nginx/
       # context: /code/nginx
