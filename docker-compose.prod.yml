@@ -30,7 +30,7 @@ services:
   nginx-proxy:
     container_name: nginx-proxy
     build:
-      context: /nginx/
+      context: ./nginx/
       # context: /code/nginx
       dockerfile: Dockerfile.prod
     restart: always
