@@ -50,6 +50,7 @@ services:
 
   nginx-proxy-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt1prod
     env_file:
       - .env.prod
     volumes:
