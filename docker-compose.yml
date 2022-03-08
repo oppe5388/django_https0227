@@ -1,29 +1,5 @@
 version: '3.7'
 services:
-  # web:
-  #   image: steveltn/https-portal:1
-  #   container_name: web111
-  #   restart: always
-  #   #volumesセクション自体、現時点で不要
-  #   # volumes:
-  #   #   - ./nginx/ssl_certs:/var/lib/https-portal
-  #   #   - ./nginx/conf/mysite_nginx.conf:/etc/nginx/conf.d/mysite_nginx.conf
-  #   #   - ./nginx/conf/mysite_nginx.conf:/var/lib/nginx-conf/vccmarsh.link.conf.erb:ro
-  #   #   - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
-  #   #   # - ./src/static:/static
-  #   #   - ./static:/static
-
-  #   ports:
-  #     - '80:80'
-  #     - '443:443'
-  #   environment:
-  #     #DOMAINS: 'vccmarsh.link -> http://web:8080/'
-  #     DOMAINS: 'vccmarsh.link -> http://django:8001'
-  #     STAGE: 'local'
-  #     #FORCE_RENEW: 'true'
-  #   depends_on:
-  #     - django
-
   nginx:
     build: ./nginx
     volumes:
@@ -45,7 +21,6 @@ services:
       - static_volume:/code/static
       - media_volume:/code/media
     expose:
-    #   - '8001'
       - '8000'
     # command: uwsgi --socket :8001 --module mysite.wsgi
     # command: python3 manage.py runserver 0.0.0.0:8000

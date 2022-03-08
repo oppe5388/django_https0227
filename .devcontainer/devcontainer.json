@@ -1,7 +1,8 @@
 {
 	"name": "AnythingOK",
 	"dockerComposeFile": "../docker-compose.yml",
-	"forwardPorts": [8001],
+	// "dockerComposeFile": "../docker-compose.prod.yml",
+	"forwardPorts": [8000],
 	"service": "django",
 	"workspaceFolder": "/code",
 	"overrideCommand": false,
