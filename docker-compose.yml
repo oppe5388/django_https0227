@@ -2,6 +2,7 @@ version: '3.7'
 services:
   nginx:
     build: ./nginx
+    container_name: nginx111
     volumes:
       - static_volume:/code/static
       - media_volume:/code/media

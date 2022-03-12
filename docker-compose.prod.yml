@@ -28,7 +28,7 @@ services:
       - .env.prod
 
   nginx-proxy:
-    container_name: nginx-proxy
+    container_name: nginx-proxy1prod
     build:
       context: ./nginx/
       # context: /code/nginx
@@ -49,7 +49,8 @@ services:
 
 
   nginx-proxy-letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    # image: jrcs/letsencrypt-nginx-proxy-companion
+    image: nginxproxy/acme-companion
     container_name: letsencrypt1prod
     env_file:
       - .env.prod
@@ -58,6 +59,7 @@ services:
       - certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
       - vhost:/etc/nginx/vhost.d
+      - acme:/etc/acme.sh
     depends_on:
       - nginx-proxy
 
@@ -68,3 +70,4 @@ volumes:
   certs:
   html:
   vhost:
+  acme:
