@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Oisoテストサイト</title>
+    <title>VCC</title>
 
     <!-- Custom fonts for this template-->
     <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
@@ -43,10 +43,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href='{% url "myinfo:index" %}'>
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Oisoテスト</div>
+                <div class="sidebar-brand-text mx-3">VCC MARSH</div>
             </a>
 
             <!-- Divider -->
@@ -56,10 +53,10 @@
             <li class="nav-item">
                 <a class="nav-link" href='{% url "myinfo:index" %}'>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>お知らせ一覧</span></a>
+                    <span>おしらせ</span></a>
             </li>
 
-            <!-- Divider -->
+            {% comment %} <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -81,7 +78,7 @@
                         <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
-            </li>
+            </li> {% endcomment %}
 
 
             <!-- Divider -->
@@ -113,7 +110,7 @@
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        {% comment %} <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link" href="{% url 'myinfo:notifi_delete' %}" role="button">
                             <i class="fas fa-bell fa-fw"></i>
                             <!-- Counter - Alerts -->
@@ -121,15 +118,17 @@
                                 <span class="badge badge-danger badge-counter">通知があります</span>
                             {% endif %}
                             </a>
-                        </li>
+                        </li> {% endcomment %}
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="text-gray-600 d-flex align-items-center">
                             {% if user.is_authenticated %}
-                                    <div>{{ user }} -</div>
-                                    <a href='{% url "logout" %}' class="nav-link">Logout</a>
+                                    <div>{{ user.last_name }}　</div>
+                                    <a href='{% url "logout" %}' class="nav-link">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </a>
                             {% else %}
                                 <a href='{% url "login" %}' class="nav-link">Login</a>
                             {% endif %}
@@ -163,7 +162,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Oiso 2021</span>
+                        <span>Copyright &copy; VccMarsh 2022</span>
                     </div>
                 </div>
             </footer>

@@ -54,7 +54,7 @@
             {% comment %} <a href="{% url 'myinfo:add_form' %}" class="btn btn-primary">summernote</a> {% endcomment %}
             {% comment %} <a href="{% url 'myinfo:add_post' %}" class="btn btn-primary">インラインフォームセット</a> {% endcomment %}
             <a href="{% url 'myinfo:add_fbvform' %}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> 新規(FBV)</a>
+            <i class="fas fa-plus"></i> 新規</a>
         </div>
     {% endif %}
     </div>
@@ -186,11 +186,10 @@
     </ul>
 
 
-    <div class="d-flex my-3">
+    {% comment %} <div class="d-flex my-3">
         <div class="ml-auto">
             <a href="{% url 'myinfo:export' %}" class="btn btn-primary">CSVエクスポート</a>
-            {% comment %} <a href="{% url 'myinfo:fileuptest' %}" class="btn btn-primary">ファイルUPテスト</a> {% endcomment %}
         </div>
-    </div>
+    </div> {% endcomment %}
 
 {% endblock %}
