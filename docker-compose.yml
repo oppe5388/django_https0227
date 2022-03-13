@@ -10,6 +10,8 @@ services:
       - 1317:80
     depends_on:
       - django
+    environment:
+      - TZ=Asia/Tokyo
 
 
   django:
@@ -30,6 +32,8 @@ services:
       - db
     env_file:
       - ./.env.dev
+    environment:
+      - TZ=Asia/Tokyo
 
   db:
     # image: postgres:latest
@@ -44,6 +48,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=db
+      - TZ=Asia/Tokyo
     env_file:
       - ./.env.dev
 

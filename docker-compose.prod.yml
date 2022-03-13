@@ -18,6 +18,8 @@ services:
       - db
     env_file:
       - .env.prod
+    environment:
+      - TZ=Asia/Tokyo
 
   db:
     image: postgres
@@ -26,6 +28,8 @@ services:
       - db-data:/var/lib/postgresql/data
     env_file:
       - .env.prod
+    environment:
+      - TZ=Asia/Tokyo
 
   nginx-proxy:
     container_name: nginx-proxy1prod
@@ -46,6 +50,8 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - django
+    environment:
+      - TZ=Asia/Tokyo
 
 
   nginx-proxy-letsencrypt:
@@ -62,6 +68,8 @@ services:
       - acme:/etc/acme.sh
     depends_on:
       - nginx-proxy
+    environment:
+      - TZ=Asia/Tokyo
 
 volumes:
   db-data:
