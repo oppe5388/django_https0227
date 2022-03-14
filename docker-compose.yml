@@ -20,7 +20,8 @@ services:
     container_name: django111
     volumes:
       # - ./src:/code
-      - ./:/code:cached
+      # - ./:/code:cached
+      - ./:/code
       - static_volume:/code/static
       - media_volume:/code/media
     expose:
