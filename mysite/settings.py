@@ -185,19 +185,36 @@ SUMMERNOTE_CONFIG = {
 }
 
 
+#とりあえずログ出力設定　https://is.gd/8GCTgJ
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'production': {
+            'format': '%(asctime)s [%(levelname)s] %(process)d %(thread)d '
+                      '%(pathname)s:%(lineno)d %(message)s'
+        },
+    },
     'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'logs/django.log',  #環境に合わせて変更
+            'formatter': 'production',
+            'level': 'INFO',
         },
     },
     'loggers': {
-        'django.db.backends': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
+        # 自作したログ出力
+        '': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        # Djangoの警告・エラー
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
