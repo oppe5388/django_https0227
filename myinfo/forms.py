@@ -31,14 +31,7 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         # tags(通知)を横並び
-        # lst = User.objects.filter(is_active=True).values_list('id',flat=True)
         self.fields['tags'].initial = User.objects.filter(is_active=True).values_list('id',flat=True)
-
-        # tags = forms.ModelMultipleChoiceField(
-        #     label='宛先', queryset=User.objects.filter(is_active=True).all(), required=False,
-        #     widget=CustomCheckboxSelectMultiple,  # ここで、今作ったウィジェットを指定
-        #     # initial = lst,
-        # )
 
         for field in self.fields.values():
             if 'class' in field.widget.attrs:
@@ -52,8 +45,8 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
         fields = ['category', 'title', 'body', ]
         widgets = {
             'body': SummernoteWidget(),
-            'title': forms.TextInput(attrs={'placeholder': 'タイトル'}),
-            'title': TextInput(attrs={'placeholder': 'タイトル'}),
+            'title': forms.TextInput(attrs={'placeholder': 'タイトルを入力してください'}),
+            # 'title': TextInput(attrs={'placeholder': 'タイトル'}),
         }
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く

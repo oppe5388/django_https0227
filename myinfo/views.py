@@ -14,6 +14,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
+from datetime import datetime
+
 
 #関数ビューで通知の中間テーブルCreateを作ってみる
 def add_fbvform(request):
@@ -23,6 +25,7 @@ def add_fbvform(request):
         if form.is_valid(): 
             obj = form.save(commit=False)
             obj.user = request.user
+            obj.create_at = datetime.now
             obj.save()
 
             #添付ファイル：保存＆モデル書き込み
@@ -40,12 +43,6 @@ def add_fbvform(request):
                 instance = Attachments(file_path=request.FILES['pdf_file3'] , information=obj)
                 instance.save()
 
-
-            # code    = request.POST["code"]
-            # city    = request.POST["city"]
-            # A       = Airport(code=code, city=city) #インスタンス作成
-            # A.save()  #データベースに保存
-
             # user = get_object_or_404(User, pk=request.POST["notification_user"])#これで出来た
             # user = User.objects.get(pk=request.POST["notification_user"])
             # Notifications.objects.create(user=user, information=obj)
@@ -55,23 +52,9 @@ def add_fbvform(request):
             for user in result:
                 # user_instance = User.objects.get(pk=user)#これ出来ない・
                 user_instance = get_object_or_404(User, pk=user)
-                Notifications.objects.create(user=user_instance, information=obj)
+                # Notifications.objects.create(user=user_instance, information=obj)
                 #既読も同じでok？
                 ReadStates.objects.create(user=user_instance, information=obj)
-
-            # if request.FILES['file']:
-            #     for excel in request.FILES.getlist('excel'):
-            
-                # files = request.FILES.getlist('file', False)
-
-            # if file in request.files:
-            #     files = request.FILES.getlist('file')
-
-            # if request.method == 'POST' and request.FILES['myfile']:
-            #     myfile = request.FILES['myfile']
-            #     fs = FileSystemStorage()
-            #     filename = fs.save(myfile.name, myfile)
-            #     uploaded_file_url = fs.url(filename)
 
             #↓これ↓が最終
             # file = request.FILES.get('file')
@@ -80,7 +63,6 @@ def add_fbvform(request):
 
                 # for file in files:
                 #     Attachments.objects.create(file_path=file, information=obj)
-
 
             return redirect('myinfo:index')
 

@@ -35,7 +35,8 @@ class Information(models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField()
     to_flag = models.CharField(max_length=100, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=False)#impot-exportで任意にするため
     updated_at = models.DateTimeField(auto_now=True)
      
     def __str__(self):
