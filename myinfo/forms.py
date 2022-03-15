@@ -52,6 +52,8 @@ class InformationForm(LoginRequiredMixin, forms.ModelForm):
         fields = ['category', 'title', 'body', ]
         widgets = {
             'body': SummernoteWidget(),
+            'title': forms.TextInput(attrs={'placeholder': 'タイトル'}),
+            'title': TextInput(attrs={'placeholder': 'タイトル'}),
         }
 
         #↑のフィールドのラッピングやめて、ここにカテゴリ等1つずつ書く

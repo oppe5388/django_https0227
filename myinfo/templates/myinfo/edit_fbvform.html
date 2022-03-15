@@ -21,8 +21,9 @@
             {{ each_notifi.user }}<br>
         {% endfor %} {% endcomment %}
 
-        <div>通知先</div>
-        <div class="mb-3">{{ form.tags }}</div>
+        {% comment %} <div>通知先</div>
+        <div class="mb-3">{{ form.tags }}</div> {% endcomment %}
+        <div hidden>{{ form.tags }}</div> 
 
         {% comment %} {% for each_notifi in notification %}
             <div>{{ each_notifi.user }}</div>
