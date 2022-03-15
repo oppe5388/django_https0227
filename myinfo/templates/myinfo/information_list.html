@@ -140,7 +140,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="small">{{ information.created_at }}　{{ information.user }}</div>
+                <div class="small">{{ information.created_at }}　{{ information.user.last_name }}</div>
                 <div>{{ information.filefield }}</div>
                 <div>
                 {{ information.body | striptags | truncatechars_html:50}}

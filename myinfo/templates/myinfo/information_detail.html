@@ -7,6 +7,12 @@
 		{% endfor %}
 {% endif %}
 
+<div class="small mb-2">
+{{ information.created_at }}　
+<i class="fas fa-folder-open mr-1"></i>{{ information.category }}　
+<i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}
+</div>
+
     <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -36,16 +42,9 @@
 
         </div>
         <div class="card-body">
-            <div class="small">
-            {% comment %} <i class="fas fa-paper-plane mr-1"></i>{{ information.to_flag }} {% endcomment %}
-            <i class="fas fa-user-edit ml-3 mr-1"></i>{{ information.user }}
-            {{ information.created_at }}
-            <i class="fas fa-folder-open mr-1"></i>{{ information.category }}
-            </div>            
 
             {% comment %} ↓attachmentモデル逆参照 {% endcomment %}
             {% for each_attachments in information.info_attach.all %}
-                <hr>
                 {% if '.png' in each_attachments.file_path|stringformat:"s" or '.jpg' in each_attachments.file_path|stringformat:"s" %}
                     <img src = /media/{{ each_attachments.file_path }} />
                 {% endif %}
@@ -54,9 +53,9 @@
                 {% comment %} {{ each_attachments.file_path }} {% endcomment %}
                 {{ each_attachments.file_name }}
                 </a>
+                <hr>
             {% endfor %}
 
-            <hr>
             <div>{{ information.body | safe }}</div>
         </div>
     </div>
