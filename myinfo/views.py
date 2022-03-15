@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
-from datetime import datetime
+from django.utils import timezone
 
 
 #関数ビューで通知の中間テーブルCreateを作ってみる
@@ -25,7 +25,7 @@ def add_fbvform(request):
         if form.is_valid(): 
             obj = form.save(commit=False)
             obj.user = request.user
-            obj.create_at = datetime.now
+            obj.created_at = timezone.datetime.now()
             obj.save()
 
             #添付ファイル：保存＆モデル書き込み
