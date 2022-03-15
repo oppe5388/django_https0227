@@ -140,7 +140,8 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="small">{{ information.created_at }}　{{ information.user.last_name }}</div>
+                <div class="small">{{ information.created_at|date:"Y-m-j" }}　
+                    <i class="fas fa-user-edit mr-1"></i>{{ information.user.last_name }}</div>
                 <div>{{ information.filefield }}</div>
                 <div>
                 {{ information.body | striptags | truncatechars_html:50}}
