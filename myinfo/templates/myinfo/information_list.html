@@ -85,7 +85,7 @@
                 {% if request.user.is_staff %}
                     {% for unread in unread_set %}
                         {% if information == unread.information %}
-                            <div class="badge badge-warning">{{ unread.user }}</div>
+                            <div class="badge badge-warning">{{ unread.user.last_name }}</div>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
