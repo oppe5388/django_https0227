@@ -60,8 +60,14 @@
             
             <li class="nav-item">
                 <a class="nav-link" href='{% url "mysched:mysched" %}'>
-                    <i class="fas fa-broadcast-tower"></i>
+                    <i class="fas fa-calendar-alt"></i>
                     <span>スケジュール</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href='{% url 'admin:index' %}'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>管理サイト</span></a>
             </li>
             {% comment %} <!-- Divider -->
             <hr class="sidebar-divider">
