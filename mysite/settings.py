@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_cleanup',
     'imagekit',
     # 'bootstrap_toolkit',
+    'mysched',
 ]
 
 MIDDLEWARE = [

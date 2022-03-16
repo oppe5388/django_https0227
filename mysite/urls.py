@@ -15,6 +15,7 @@ urlpatterns = [
     path('myinfo/', include('myinfo.urls')),
     path('', RedirectView.as_view(url='/myinfo/')),
 
+    path('mysched/', include('mysched.urls')),
 ]
 
 

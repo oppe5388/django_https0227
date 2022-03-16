@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<h3>送金日</h3>
+
+<div>解約登録日（または発行キャンセル登録日）</div>
+<input type="date">
+<input type="submit" class="btn btn-outline-primary mr-1 p-1" value="Search" />
+<a href="{% url 'mysched:mysched' %}" class="btn btn-outline-secondary p-1">Clear</a>
+
+<div>承認日：</div>
+<div>↓</div>
+<div>送金日：</div>
+
+{% endblock %}
+

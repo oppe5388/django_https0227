@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100, null=True, verbose_name='カテゴリ名')),
                 ('sort_no', models.IntegerField(verbose_name='ソートNo')),
-                ('created_at', models.DateTimeField()),
+                ('created_at', models.DateTimeField(auto_now=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
             ],
             options={
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('body', models.TextField()),
                 ('to_flag', models.CharField(blank=True, max_length=100, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('created_at', models.DateTimeField()),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='myinfo.InfoCategory')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
