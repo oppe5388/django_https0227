@@ -10,27 +10,25 @@
 
 <hr>
 
+
 <div>解約登録日（または発行キャンセル登録日）</div>
-<input type="date">
-<input type="submit" class="btn btn-outline-primary mr-1 p-1" value="更新" />
-<div>↓</div>
-<div>承認日：</div>
-<div>↓</div>
-<div>送金日：</div>
+{% comment %} <input type="date"> {% endcomment %}
 
-<div>{{ moneyForm.keyword }}</div>
+<form action='{% url "mysched:mysched" %}' method='get'>
+    <div>{{ moneyForm.date_field }}
+    <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="更新"></div>
+</form>
 
-<div class="my-box mr-auto">
-    <form action='{% url "myinfo:index" %}' method='get'>
-        <div class='form-group form-inline'>
-            
-            <div>{{ moneyForm.keyword }}</div>
-            
-            <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="Search" />
-            <a href="{% url 'myinfo:index' %}" class="btn btn-outline-secondary p-1">Clear</a>
-        </div>
-    </form>
-</div>
+    
+{% comment %} {% if past_sched %} {% endcomment %}
+<div>登録日：{{ input_date }}</div>
+<div>↓</div>
+<div>承認日：{{ past_sched.fix }}</div>
+<div>↓</div>
+<div>送金日：{{ past_sched.transfer }}</div>
+
+{% comment %} {% endif %} {% endcomment %}
+
 
 {% endblock %}
 

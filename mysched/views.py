@@ -2,28 +2,32 @@ from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.http import HttpResponse, Http404 # 追記
 from .models import MoneyTrans
 from .forms import MoneyForm
+from datetime import date, datetime
+
 
 def mysched(request):
 
     moneyForm = MoneyForm(request.GET)
 
     context = {
-        'moneyForm': moneyForm,
+        'moneyForm': MoneyForm,
     }
 
     if moneyForm.is_valid():
-        queryset = MoneyTrans.objects.all()
-        keyword = moneyForm.cleaned_data['keyword']
-        if keyword:
-            queryset = queryset.filter(title__icontains=k).order_by('-id')#
+        input_date = moneyForm.cleaned_data['input_date']
+        
+        if input_date:
+            #入力日以降のクエリセットの1つ目
+            past_sched = MoneyTrans.objects.filter(entry__gte=input_date).order_by('entry').first()
+            context['past_sched'] = past_sched
+            context['input_date'] = input_date
 
-            context['moneytrans'] = queryset
     else:
         moneyForm = MoneyForm()
-        moneytrans = MoneyTrans.objects.filter(deadline__gte=date.today()).order_by('deadline')#以上の場合
-        context['moneytrans'] = moneytrans
+        #今日以降のクエリセット
+        moneytrans = MoneyTrans.objects.filter(deadline__gte=date.today()).order_by('deadline')
 
-        
+        context['moneytrans'] = moneytrans
 
     # #通知（有無だけ）
     # if request.user.id is not None:
