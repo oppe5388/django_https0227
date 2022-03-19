@@ -4,14 +4,33 @@
 
 <h3>送金日</h3>
 
+{% for money in moneytrans %}
+    <div>〜{{ money.deadline|date:"n/j(D)" }}到着　→　{{ money.transfer|date:"n/j(D)" }}送金</div>
+{% endfor %}
+
+<hr>
+
 <div>解約登録日（または発行キャンセル登録日）</div>
 <input type="date">
-<input type="submit" class="btn btn-outline-primary mr-1 p-1" value="Search" />
-<a href="{% url 'mysched:mysched' %}" class="btn btn-outline-secondary p-1">Clear</a>
-
+<input type="submit" class="btn btn-outline-primary mr-1 p-1" value="更新" />
+<div>↓</div>
 <div>承認日：</div>
 <div>↓</div>
 <div>送金日：</div>
+
+<div>{{ moneyForm.keyword }}</div>
+
+<div class="my-box mr-auto">
+    <form action='{% url "myinfo:index" %}' method='get'>
+        <div class='form-group form-inline'>
+            
+            <div>{{ moneyForm.keyword }}</div>
+            
+            <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="Search" />
+            <a href="{% url 'myinfo:index' %}" class="btn btn-outline-secondary p-1">Clear</a>
+        </div>
+    </form>
+</div>
 
 {% endblock %}
 
