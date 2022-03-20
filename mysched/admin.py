@@ -6,10 +6,13 @@ from import_export.admin import ImportExportModelAdmin
 from import_export.formats import base_formats
     
 class MoneyTransResource(ModelResource):
+    # field名とcsvの列名が異なる場合はここで指定する。
+
     class Meta:
         model = MoneyTrans
-        import_order = ('id', 'transfer', 'deadline', 'entry', 'fix', 'setoff')
-        # import_id_fields = ['id']
+        skip_unchanged = True
+        # import_order = ('id', 'transfer', 'deadline', 'entry', 'fix', 'setoff')
+        import_id_fields = ['transfer']
 
 #お知らせインポート、エクスポート
 class MoneyTransAdmin(ImportExportModelAdmin, admin.ModelAdmin):

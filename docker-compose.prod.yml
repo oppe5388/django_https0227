@@ -7,10 +7,10 @@ services:
       dockerfile: Dockerfile.prod
     container_name: django1prod
     volumes:
-      # - ./src:/code
       # - ./:/code:cached
-      - ./:/code
-      - static_volume:/code/static
+      - ./:/code:consistent
+      # - static_volume:/code/static
+      - ./static:/code/static
       - media_volume:/code/media
     expose:
       - 8000
@@ -36,7 +36,6 @@ services:
     container_name: nginx-proxy1prod
     build:
       context: ./nginx/
-      # context: /code/nginx
       dockerfile: Dockerfile.prod
     restart: always
     ports:
@@ -74,7 +73,7 @@ services:
 
 volumes:
   db-data:
-  static_volume:
+  # static_volume:
   media_volume:
   certs:
   html:
