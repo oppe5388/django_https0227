@@ -14,20 +14,20 @@
 <div>解約登録日（または発行キャンセル登録日）</div>
 {% comment %} <input type="date"> {% endcomment %}
 
-<form action='{% url "mysched:mysched" %}' method='get'>
-    <div>{{ moneyForm.date_field }}
-    <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="更新"></div>
-</form>
+{% if past_sched %}
+    <div>登録日：{{ input_date }}</div>
+    <div>↓</div>
+    <div>承認日：{{ past_sched.fix }}</div>
+    <div>↓</div>
+    <div>送金日：{{ past_sched.transfer }}</div>
 
-    
-{% comment %} {% if past_sched %} {% endcomment %}
-<div>登録日：{{ input_date }}</div>
-<div>↓</div>
-<div>承認日：{{ past_sched.fix }}</div>
-<div>↓</div>
-<div>送金日：{{ past_sched.transfer }}</div>
-
-{% comment %} {% endif %} {% endcomment %}
+    <a href="{% url 'mysched:mysched' %}" class="btn btn-outline-secondary p-1">戻る</a>
+{% else %}
+    <form action='{% url "mysched:mysched" %}' method='get'>
+        {{ moneyForm.input_date }}
+        <input type="submit" class="btn btn-outline-primary mr-1 p-1" value="表示">
+    </form>
+{% endif %}
 
 
 {% endblock %}
