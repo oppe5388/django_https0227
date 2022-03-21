@@ -42,7 +42,8 @@ services:
       - 443:443
       - 80:80
     volumes:
-      - static_volume:/code/static
+      # - static_volume:/code/static
+      - ./static:/code/static
       - media_volume:/code/media
       - certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
